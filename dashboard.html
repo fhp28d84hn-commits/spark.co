@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Dashboard — SPARK.CO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono&family=Plus+Jakarta+Sans:wght@400;500&family=Syne:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-charbon">
+
+    <!-- NAV -->
+    <nav class="nav">
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">SP/<span class="accent">\</span>RK</a>
+            <div class="nav-links">
+                <a href="#" class="nav-link" id="user-email">...</a>
+                <a href="#" class="nav-link" onclick="spark.auth.logout()">Déconnexion</a>
+                <a href="index.html" class="btn btn-sm btn-etincelle mobile-show">Retour au site</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="section-padding">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1 data-reveal="fade-right">Mon Dashboard</h1>
+                <div id="admin-link-container"></div>
+            </div>
+
+            <div id="orders-container" class="grid">
+                <!-- Skeleton loading -->
+                <div class="glass-card skeleton" style="height: 300px;"></div>
+                <div class="glass-card skeleton" style="height: 300px;"></div>
+            </div>
+
+            <!-- Empty state (hidden by default) -->
+            <div id="empty-state" class="glass-card text-center" style="display: none;">
+                <h2 class="mb-medium">Vous n'avez pas encore de commande</h2>
+                <p class="subtitle mb-large" style="margin: 0 auto 32px;">Lancez votre projet dès maintenant et recevez votre site pro en 48h.</p>
+                <a href="https://tally.so/r/spark" class="btn btn-lg btn-etincelle">Je lance mon site →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-legal">
+                <p>&copy; 2025 SPARK.CO · Dashboard Client</p>
+                <a href="index.html" class="accent-text">Retour à l'accueil</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="app.js"></script>
+    <script src="main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const user = spark.auth.getCurrentUser();
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            document.getElementById('user-email').textContent = user.email;
+            
+            if (user.role === 'admin') {
+                document.getElementById('admin-link-container').innerHTML = 
+                    '<a href="admin.html" class="btn btn-sm btn-charbon">Panel Admin</a>';
+            }
+
+            await loadOrders();
+        });
+
+        async function loadOrders() {
+            const container = document.getElementById('orders-container');
+            const emptyState = document.getElementById('empty-state');
+
+            try {
+                const orders = await spark.api('/orders');
+                container.innerHTML = '';
+
+                if (orders.length === 0) {
+                    emptyState.style.display = 'block';
+                    container.style.display = 'none';
+                    return;
+                }
+
+                orders.forEach(order => {
+                    const orderEl = document.createElement('div');
+                    orderEl.className = 'glass-card order-item';
+                    orderEl.setAttribute('data-reveal', 'fade-up');
+                    
+                    orderEl.innerHTML = `
+                        <div class="flex-between" style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 24px;">
+                            <div>
+                                <span class="eyebrow" style="margin-bottom: 8px;">Commande #${order.id.slice(0,8)}</span>
+                                <p style="font-size: 14px; color: var(--c-gris);">Date : ${spark.ui.formatDate(order.created_at)}</p>
+                            </div>
+                            <span class="status-badge status-${order.status}">${formatStatus(order.status)}</span>
+                        </div>
+                        
+                        <div class="brief-box">
+                            <label class="eyebrow" style="font-size: 10px;">Votre Brief</label>
+                            <textarea class="form-control brief-textarea" id="brief-${order.id}">${order.brief || ''}</textarea>
+                            <button class="btn btn-sm btn-etincelle mt-small" onclick="updateBrief('${order.id}')" id="btn-save-${order.id}">
+                                Enregistrer les modifications
+                            </button>
+                        </div>
+                        
+                        ${order.status === 'live' ? `
+                            <div class="mt-medium">
+                                <p class="accent-text">Félicitations ! Votre site est en ligne :</p>
+                                <a href="${order.site_url || '#'}" target="_blank" class="nav-link" style="text-decoration: underline;">
+                                    ${order.site_url || 'Lien bientôt disponible'}
+                                </a>
+                            </div>
+                        ` : ''}
+                    `;
+                    container.appendChild(orderEl);
+                });
+
+                // Initialize animations for new elements
+                if (window.initReveal) window.initReveal();
+
+            } catch (error) {
+                container.innerHTML = `<p class="text-center" style="color:#ff4444">Erreur lors du chargement : ${error.message}</p>`;
+                spark.toast.error('Impossible de charger les commandes');
+            }
+        }
+
+        async function updateBrief(orderId) {
+            const brief = document.getElementById(`brief-${orderId}`).value;
+            const btn = document.getElementById(`btn-save-${orderId}`);
+
+            spark.ui.setLoading(btn, true);
+            try {
+                await spark.api(`/orders/${orderId}/brief`, {
+                    method: 'PUT',
+                    body: JSON.stringify({ brief })
+                });
+                spark.toast.success('Brief mis à jour !');
+            } catch (error) {
+                spark.toast.error(error.message);
+            } finally {
+                spark.ui.setLoading(btn, false);
+            }
+        }
+
+        function formatStatus(status) {
+            const map = {
+                'pending': 'En attente',
+                'brief_received': 'Brief reçu',
+                'in_progress': 'En cours',
+                'review': 'En révision',
+                'live': 'En ligne'
+            };
+            return map[status] || status;
+        }
+    </script>
+</body>
+</html>

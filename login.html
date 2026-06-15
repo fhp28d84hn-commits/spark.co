@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion — SPARK.CO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono&family=Plus+Jakarta+Sans:wght@400;500&family=Syne:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-charbon flex-center" style="min-height: 100vh;">
+
+    <div class="container">
+        <div class="text-center mb-medium">
+            <a href="index.html" class="logo">SP/<span class="accent">\</span>RK</a>
+        </div>
+
+        <div class="glass-card form-card" data-reveal="fade-up">
+            <h2 class="text-center mb-medium">Connexion</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" required placeholder="votre@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" class="form-control" required placeholder="••••••••">
+                </div>
+                <div id="login-error" class="form-error mb-small">Identifiants incorrects.</div>
+                <button type="submit" class="btn btn-lg btn-etincelle" style="width: 100%;" id="login-btn">
+                    Se connecter
+                </button>
+            </form>
+            <p class="text-center mt-medium" style="font-size: 14px; color: var(--c-gris);">
+                Pas encore de compte ? <a href="register.html" class="accent-text">Créer un compte</a>
+            </p>
+        </div>
+        
+        <div class="text-center mt-large">
+            <a href="index.html" class="nav-link" style="font-size: 12px;">← Retour à l'accueil</a>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="app.js"></script>
+    <script src="main.js"></script>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const btn = document.getElementById('login-btn');
+            const errorEl = document.getElementById('login-error');
+
+            errorEl.style.display = 'none';
+            spark.ui.setLoading(btn, true);
+
+            try {
+                await spark.auth.login(email, password);
+                spark.toast.success('Connexion réussie !');
+                setTimeout(() => window.location.href = 'dashboard.html', 1000);
+            } catch (error) {
+                errorEl.textContent = error.message;
+                errorEl.style.display = 'block';
+                spark.toast.error('Erreur de connexion');
+            } finally {
+                spark.ui.setLoading(btn, false);
+            }
+        });
+    </script>
+</body>
+</html>

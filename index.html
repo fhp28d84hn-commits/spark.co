@@ -4,28 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPARK.CO — Ton site pro. En 48h. Pas de blabla.</title>
-    <meta name="description" content="Sites web one-page ultra-performants pour artisans, freelances et petits commerces. 490€ tout inclus. Livré en 48h. Garanti ou remboursé.">
     
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://spark.co/">
-    <meta property="og:title" content="SPARK.CO — Ton site pro. En 48h. Pas de blabla.">
-    <meta property="og:description" content="Sites web one-page pour artisans et freelances. 490€ tout inclus. Livré en 48h.">
+    <!-- SEO -->
+    <meta name="description" content="SPARK.CO livre des sites web one-page ultra-performants en 48h pour 490€. Idéal pour freelances, artisans et petits commerces. Prix fixe. Garanti.">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono&family=Plus+Jakarta+Sans:wght@400;500&family=Syne:wght@800&display=swap" rel="stylesheet">
     
+    <!-- Styles -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- SECTION 0: LOADER -->
-    <div id="loader" class="loader">
+    <!-- LOADER -->
+    <div class="loader" id="loader">
         <div class="loader-content">
-            <svg class="loader-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M30 70L50 30L70 70" stroke="var(--c-etincelle)" stroke-width="8" stroke-linecap="square" id="loader-chevron"/>
+            <svg class="loader-logo" viewBox="0 0 100 100">
+                <path id="chevron" d="M30 30 L50 50 L70 30" fill="none" stroke="#FF4500" stroke-width="8" stroke-linecap="square"/>
             </svg>
             <div class="loader-text" id="loader-text">
                 <span class="letter">S</span>
@@ -37,70 +34,72 @@
         </div>
     </div>
 
-    <!-- CURSOR DOT -->
-    <div id="cursor-dot"></div>
-
-    <!-- SECTION 1: NAV -->
+    <!-- NAV -->
     <nav class="nav">
         <div class="container nav-wrapper">
-            <a href="#" class="logo">SP<span class="accent">/&#92;</span>RK</a>
-            <a href="https://tally.so/r/spark" class="btn btn-sm btn-etincelle pulse">Je lance mon site →</a>
+            <a href="index.html" class="logo">SP/<span class="accent">\</span>RK</a>
+            <div class="nav-links">
+                <a href="tarifs.html" class="nav-link">Tarifs</a>
+                <a href="login.html" class="nav-link" id="nav-login">Connexion</a>
+                <a href="dashboard.html" class="nav-link" id="nav-dashboard" style="display: none;">Mon Dashboard</a>
+                <a href="https://tally.so/r/spark" class="btn btn-sm btn-etincelle mobile-show">Je lance mon site →</a>
+            </div>
         </div>
     </nav>
 
     <main>
-        <!-- SECTION 2: HERO -->
-        <section class="hero" id="hero">
-            <div class="container hero-content">
-                <div class="hero-text" data-reveal="fade-up">
-                    <span class="eyebrow">SITES WEB PRO · FRANCE · 48H</span>
-                    <h1>Ton site pro.<br>En <span class="accent-text">48 heures.</span></h1>
-                    <h3 class="subtitle">490 € tout inclus. Garanti ou remboursé. Pour les artisans et freelances qui n'ont pas de temps à perdre.</h3>
-                    
-                    <div class="hero-stats">
-                        <div class="stat-item">
-                            <span class="stat-value" data-count="48">0</span><span class="stat-suffix">h</span>
-                            <span class="stat-label">Délai</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-value" data-count="490">0</span><span class="stat-suffix">€</span>
-                            <span class="stat-label">Prix TTC</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-value" data-count="100">0</span><span class="stat-suffix">%</span>
-                            <span class="stat-label">Satisfaits</span>
-                        </div>
-                    </div>
-
-                    <a href="https://tally.so/r/spark" class="btn btn-lg btn-etincelle">Je lance mon site →</a>
-                </div>
-            </div>
+        <!-- HERO -->
+        <section class="hero bg-charbon">
             <div class="grid-overlay"></div>
-        </section>
-
-        <!-- SECTION 3: TICKER -->
-        <section class="ticker">
-            <div class="ticker-wrapper">
-                <div class="ticker-content">
-                    COIFFEUR · PHOTOGRAPHE · ÉLECTRICIEN · COACH · CONSULTANT · PLOMBIER · ARCHITECTE · TATOUEUR · KINÉSITHÉRAPEUTE · ARTISAN · COIFFEUR · PHOTOGRAPHE · ÉLECTRICIEN · COACH · CONSULTANT · PLOMBIER · ARCHITECTE · TATOUEUR · KINÉSITHÉRAPEUTE · ARTISAN ·
+            <div class="container hero-content">
+                <span class="eyebrow" data-reveal="fade-up">SITES WEB PRO · FRANCE · 48H</span>
+                <h1 data-reveal="fade-up" data-delay="0.1" class="text-gradient">Ton site pro.<br>En <span class="accent">48 heures.</span></h1>
+                <p class="subtitle" data-reveal="fade-up" data-delay="0.2">
+                    490 € tout inclus. Garanti ou remboursé. Pour les artisans et freelances qui n'ont pas de temps à perdre.
+                </p>
+                
+                <div class="hero-stats" data-reveal="fade-up" data-delay="0.3">
+                    <div class="stat-item">
+                        <span class="stat-value"><span data-count="48">0</span><span class="stat-suffix">h</span></span>
+                        <span class="stat-label">Délai garanti</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value"><span data-count="490">0</span><span class="stat-suffix">€</span></span>
+                        <span class="stat-label">Prix fixe TTC</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value"><span data-count="100">0</span><span class="stat-suffix">%</span></span>
+                        <span class="stat-label">Satisfaits</span>
+                    </div>
                 </div>
+
+                <a href="https://tally.so/r/spark" class="btn btn-lg btn-etincelle pulse" data-reveal="fade-up" data-delay="0.4">
+                    Je lance mon site →
+                </a>
             </div>
         </section>
 
-        <!-- SECTION 4: DOULEUR -->
-        <section class="pain section-padding bg-papier" id="douleur">
+        <!-- TICKER -->
+        <div class="ticker">
+            <div class="ticker-content">
+                COIFFEUR · PHOTOGRAPHE · ÉLECTRICIEN · COACH · CONSULTANT · PLOMBIER · ARCHITECTE · TATOUEUR · KINÉSITHÉRAPEUTE · ARTISAN · COIFFEUR · PHOTOGRAPHE · ÉLECTRICIEN · COACH · CONSULTANT · PLOMBIER · ARCHITECTE · TATOUEUR · KINÉSITHÉRAPEUTE · ARTISAN ·
+            </div>
+        </div>
+
+        <!-- DOULEUR -->
+        <section class="section-padding bg-papier">
             <div class="container">
-                <h2 data-reveal="fade-up">Tu perds des clients. Chaque jour.</h2>
+                <h2 class="text-center" data-reveal="fade-up">Tu perds des clients.<br>Chaque jour.</h2>
                 <div class="grid grid-3 mt-large">
-                    <div class="card card-pain" data-reveal="fade-up" data-delay="0.1">
+                    <div class="card card-pain glass-card" data-reveal="fade-up" data-delay="0.1">
                         <h3>Introuvable sur Google</h3>
-                        <p>95% de tes clients potentiels cherchent en ligne avant d'appeler. Tu n'existes pas.</p>
+                        <p>95% de tes clients potentiels cherchent en ligne avant d'appeler. Sans site, tu n'existes pas.</p>
                     </div>
-                    <div class="card card-pain" data-reveal="fade-up" data-delay="0.2">
-                        <h3>Profil Facebook, c'est pas un site</h3>
+                    <div class="card card-pain glass-card" data-reveal="fade-up" data-delay="0.2">
+                        <h3>Facebook, c'est pas un site</h3>
                         <p>Facebook limite ta visibilité. Un site pro, tu en es propriétaire à 100%.</p>
                     </div>
-                    <div class="card card-pain" data-reveal="fade-up" data-delay="0.3">
+                    <div class="card card-pain glass-card" data-reveal="fade-up" data-delay="0.3">
                         <h3>Les agences prennent 2000€ et 6 semaines</h3>
                         <p>Pour un freelance ou un artisan, c'est une fortune et une éternité.</p>
                     </div>
@@ -108,161 +107,163 @@
             </div>
         </section>
 
-        <!-- SECTION 5: SOLUTION -->
-        <section class="solution section-padding bg-charbon" id="solution">
-            <div class="container">
-                <div class="flex-center text-center">
-                    <h2 class="text-white" data-reveal="fade-up">SPARK règle ça.</h2>
-                    <div class="offer-box mt-large" data-reveal="scale-up">
-                        <div class="offer-header">
-                            <span class="offer-price">490€</span>
-                            <span class="offer-ttc">TTC</span>
-                        </div>
-                        <ul class="offer-list">
-                            <li>✓ Design one-page sur mesure</li>
-                            <li>✓ Développement &amp; mise en ligne</li>
-                            <li>✓ Nom de domaine 1 an</li>
-                            <li>✓ Hébergement rapide 1 an</li>
-                            <li>✓ Google Analytics connecté</li>
-                            <li>✓ Site mobile-first, Lighthouse 95+</li>
-                            <li>✓ 1 mois de support inclus</li>
-                            <li>✓ Garanti 48h ou remboursé</li>
-                        </ul>
-                        <div class="badge-guarantee-round">
-                            <span>48H</span>
-                            <span>GARANTI</span>
-                        </div>
-                        <a href="https://tally.so/r/spark" class="btn btn-lg btn-etincelle mt-medium">Je lance mon site →</a>
+        <!-- SOLUTION -->
+        <section class="section-padding bg-charbon">
+            <div class="container flex-center">
+                <h2 class="text-center" data-reveal="fade-up">SPARK règle ça.</h2>
+                <div class="offer-box mt-large glass-card" data-reveal="scale-up">
+                    <div class="badge-guarantee-round">48H<br>GARANTI</div>
+                    <div class="offer-header">
+                        <span class="offer-price">490€</span>
+                        <span class="offer-ttc">TTC</span>
                     </div>
+                    <ul class="offer-list">
+                        <li>✓ Design one-page sur mesure</li>
+                        <li>✓ Développement &amp; mise en ligne</li>
+                        <li>✓ Nom de domaine 1 an</li>
+                        <li>✓ Hébergement rapide 1 an</li>
+                        <li>✓ Google Analytics connecté</li>
+                        <li>✓ Site mobile-first, Lighthouse 95+</li>
+                        <li>✓ 1 mois de support inclus</li>
+                        <li>✓ Garanti 48h ou remboursé</li>
+                    </ul>
+                    <a href="https://tally.so/r/spark" class="btn btn-lg btn-etincelle" style="width: 100%;">
+                        Je lance mon site →
+                    </a>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 6: PROCESS -->
-        <section class="process section-padding" id="process">
+        <!-- PROCESS -->
+        <section class="section-padding bg-papier">
             <div class="container">
-                <h2 data-reveal="fade-up">Comment ça marche</h2>
+                <h2 class="text-center" data-reveal="fade-up">Comment ça marche</h2>
                 <div class="process-steps mt-large">
-                    <div class="step" data-reveal="fade-right">
+                    <div class="step" data-reveal="fade-up" data-delay="0.1">
                         <div class="step-num">01</div>
                         <div class="step-content">
-                            <h3>Tu remplis le brief</h3>
-                            <p>10 minutes pour nous dire qui tu es et ce que tu fais. C'est tout.</p>
+                            <h3>Brief en ligne</h3>
+                            <p>Tu remplis un questionnaire de 10 questions en 10 minutes. On s'occupe du reste.</p>
                         </div>
                     </div>
                     <div class="step-connector"></div>
-                    <div class="step" data-reveal="fade-right" data-delay="0.2">
+                    <div class="step" data-reveal="fade-up" data-delay="0.2">
                         <div class="step-num">02</div>
                         <div class="step-content">
-                            <h3>On développe</h3>
-                            <p>Design et code en 48h max. Tu reçois une version pour validation.</p>
+                            <h3>Design & Dev</h3>
+                            <p>On conçoit et on développe ton site ultra-performant sous 48h ouvrées.</p>
                         </div>
                     </div>
                     <div class="step-connector"></div>
-                    <div class="step" data-reveal="fade-right" data-delay="0.4">
+                    <div class="step" data-reveal="fade-up" data-delay="0.3">
                         <div class="step-num">03</div>
                         <div class="step-content">
-                            <h3>C'est en ligne</h3>
-                            <p>On publie ton site sur ton domaine. Tu es enfin visible par tes clients.</p>
+                            <h3>Mise en ligne</h3>
+                            <p>Ton site est publié. Tu reçois tes accès et tu es prêt à conquérir Google.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 7: TÉMOIGNAGES -->
-        <section class="testimonials section-padding bg-charbon" id="temoignages">
+        <!-- TESTIMONIALS -->
+        <section class="section-padding bg-charbon">
             <div class="container">
-                <h2 class="text-white" data-reveal="fade-up">Ils ont sauté le pas.</h2>
+                <h2 class="text-center" data-reveal="fade-up">Ils ont sauté le pas.</h2>
                 <div class="grid grid-3 mt-large">
-                    <div class="card card-dark" data-reveal="fade-up" data-delay="0.1">
+                    <div class="card card-dark glass-card" data-reveal="fade-up" data-delay="0.1">
                         <p class="quote">"J'avais honte de ne pas avoir de site depuis 6 ans. SPARK l'a livré en 41h. Mes clients peuvent enfin me trouver sur Google."</p>
-                        <span class="author">— Karim B., électricien, Lyon</span>
+                        <p class="author">— Karim B., électricien, Lyon</p>
                     </div>
-                    <div class="card card-dark" data-reveal="fade-up" data-delay="0.2">
+                    <div class="card card-dark glass-card" data-reveal="fade-up" data-delay="0.2">
                         <p class="quote">"Simple, rapide, pro. Exactement ce que je cherchais. Pas de jargon, pas de surprise sur la facture."</p>
-                        <span class="author">— Amandine R., coach certifiée, Bordeaux</span>
+                        <p class="author">— Amandine R., coach certifiée, Bordeaux</p>
                     </div>
-                    <div class="card card-dark" data-reveal="fade-up" data-delay="0.3">
+                    <div class="card card-dark glass-card" data-reveal="fade-up" data-delay="0.3">
                         <p class="quote">"Le résultat m'a bluffée. Je pensais qu'un site comme ça coûtait 3000 €. J'en ai eu un à 490 € en 2 jours."</p>
-                        <span class="author">— Leila M., photographe, Paris</span>
+                        <p class="author">— Leila M., photographe, Paris</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 8: FAQ -->
-        <section class="faq section-padding" id="faq">
+        <!-- FAQ -->
+        <section class="section-padding bg-papier">
             <div class="container">
-                <h2 data-reveal="fade-up">Questions fréquentes</h2>
+                <h2 class="text-center" data-reveal="fade-up">Questions fréquentes</h2>
                 <div class="faq-accordion mt-large">
                     <div class="faq-item" data-reveal="fade-up">
-                        <input type="checkbox" id="faq-1">
-                        <label for="faq-1">Est-ce que je peux modifier mon site ensuite ?</label>
+                        <input type="checkbox" id="f1">
+                        <label for="f1">Est-ce que je peux modifier mon site ensuite ?</label>
                         <div class="faq-answer">
-                            <p>Oui. On te livre un accès à un éditeur simple (type Webflow Editor ou Notion-style). Pas besoin de toucher au code.</p>
+                            <p>Oui. On te livre un accès à un éditeur simple. Pas besoin de toucher au code.</p>
                         </div>
                     </div>
                     <div class="faq-item" data-reveal="fade-up">
-                        <input type="checkbox" id="faq-2">
-                        <label for="faq-2">Et si je ne sais pas quoi mettre dedans ?</label>
+                        <input type="checkbox" id="f2">
+                        <label for="f2">Et si je ne sais pas quoi mettre dedans ?</label>
                         <div class="faq-answer">
                             <p>On a un brief de 10 questions. Tu réponds, on gère. Textes, photos, couleurs — on s'occupe de tout.</p>
                         </div>
                     </div>
                     <div class="faq-item" data-reveal="fade-up">
-                        <input type="checkbox" id="faq-3">
-                        <label for="faq-3">Vous faites quoi si je ne suis pas satisfait ?</label>
+                        <input type="checkbox" id="f3">
+                        <label for="f3">Vous faites quoi si je ne suis pas satisfait ?</label>
                         <div class="faq-answer">
                             <p>Tu es remboursé. Sans justification. C'est écrit dans le contrat.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item" data-reveal="fade-up">
-                        <input type="checkbox" id="faq-4">
-                        <label for="faq-4">C'est pour quel type d'entreprise ?</label>
-                        <div class="faq-answer">
-                            <p>Coiffeurs, coachs, photographes, électriciens, plombiers, consultants, artisans — tout pro qui a besoin d'une présence en ligne simple et efficace.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item" data-reveal="fade-up">
-                        <input type="checkbox" id="faq-5">
-                        <label for="faq-5">Et après la première année, ça coûte combien ?</label>
-                        <div class="faq-answer">
-                            <p>99 € / an pour le renouvellement hébergement + domaine. Rien de caché.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 9: CTA FINALE -->
-        <section class="final-cta section-padding bg-etincelle">
+        <!-- FINAL CTA -->
+        <section class="section-padding bg-etincelle">
             <div class="container text-center">
-                <h2 class="text-charbon" data-reveal="fade-up">Ton site est à 490 €.</h2>
-                <a href="https://tally.so/r/spark" class="btn btn-lg btn-charbon mt-medium" data-reveal="fade-up" data-delay="0.2">Je lance mon site →</a>
-                <p class="cta-small" data-reveal="fade-up" data-delay="0.4">Paiement sécurisé · Contrat signé avant démarrage · Sans engagement après livraison</p>
+                <h2 data-reveal="scale-up">Ton site est à 490 €.</h2>
+                <p class="subtitle mt-small" style="color: var(--c-charbon); opacity: 0.8; margin: 0 auto 40px;">Livré en 48h. Garanti ou remboursé.</p>
+                <a href="https://tally.so/r/spark" class="btn btn-lg btn-charbon pulse">
+                    Je lance mon site →
+                </a>
+                <p class="cta-small">Paiement sécurisé par Stripe · Facture avec TVA</p>
             </div>
         </section>
     </main>
 
-    <!-- SECTION 10: FOOTER -->
-    <footer class="footer section-padding bg-charbon">
-        <div class="container footer-grid">
-            <div class="footer-brand">
-                <a href="#" class="logo">SP<span class="accent">/&#92;</span>RK</a>
-                <p class="tagline">Ton site pro. En 48h. Pas de blabla.</p>
-            </div>
-            <div class="footer-contact">
-                <a href="mailto:contact@spark.co" class="footer-link">contact@spark.co</a>
+    <footer class="footer bg-charbon">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">SP/<span class="accent">\</span>RK</a>
+                    <p class="mt-small">Sites web ultra-performants pour pros pressés.</p>
+                </div>
+                <div>
+                    <a href="mailto:contact@spark.co" class="footer-link">contact@spark.co</a>
+                </div>
             </div>
             <div class="footer-legal">
-                <p>&copy; 2025 SPARK.CO · Tous droits réservés · Mentions légales · CGV</p>
+                <p>&copy; 2025 SPARK.CO · Tous droits réservés</p>
+                <p>Mentions légales · CGV · Paiement sécurisé par Stripe</p>
             </div>
         </div>
     </footer>
 
+    <div id="cursor-dot"></div>
+
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="app.js"></script>
     <script src="main.js"></script>
+    <script>
+        // Auth check for nav
+        document.addEventListener('DOMContentLoaded', () => {
+            if (spark.auth.isAuthenticated()) {
+                const loginLink = document.getElementById('nav-login');
+                const dashboardLink = document.getElementById('nav-dashboard');
+                if (loginLink) loginLink.style.display = 'none';
+                if (dashboardLink) dashboardLink.style.display = 'block';
+            }
+        });
+    </script>
 </body>
 </html>

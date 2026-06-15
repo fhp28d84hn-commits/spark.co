@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarifs — SPARK.CO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono&family=Plus+Jakarta+Sans:wght@400;500&family=Syne:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-charbon">
+
+    <!-- NAV -->
+    <nav class="nav">
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">SP/<span class="accent">\</span>RK</a>
+            <div class="nav-links">
+                <a href="tarifs.html" class="nav-link active">Tarifs</a>
+                <a href="login.html" class="nav-link" id="nav-login">Connexion</a>
+                <a href="dashboard.html" class="nav-link" id="nav-dashboard" style="display: none;">Mon Dashboard</a>
+                <a href="https://tally.so/r/spark" class="btn btn-sm btn-etincelle mobile-show">Je lance mon site →</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="section-padding">
+            <div class="container text-center">
+                <span class="eyebrow" data-reveal="fade-up">PRIX FIXE · SANS SURPRISE</span>
+                <h1 data-reveal="fade-up" data-delay="0.1" class="text-gradient">490€ Tout inclus.</h1>
+                <p class="subtitle mt-small" style="margin-left: auto; margin-right: auto;" data-reveal="fade-up" data-delay="0.2">
+                    Une offre unique, simple et radicale pour les pros qui veulent des résultats, pas du blabla.
+                </p>
+
+                <div class="offer-box mt-large glass-card" style="margin-left: auto; margin-right: auto;" data-reveal="scale-up">
+                    <div class="badge-guarantee-round">48H<br>GARANTI</div>
+                    <div class="offer-header">
+                        <span class="offer-price">490€</span>
+                        <span class="offer-ttc">TTC</span>
+                    </div>
+                    <div class="grid grid-3" style="text-align: left; margin-bottom: 40px;">
+                        <ul class="offer-list">
+                            <li>Design one-page sur mesure</li>
+                            <li>Développement &amp; mise en ligne</li>
+                            <li>Nom de domaine (1 an)</li>
+                        </ul>
+                        <ul class="offer-list">
+                            <li>Hébergement rapide (1 an)</li>
+                            <li>Google Analytics</li>
+                            <li>SEO local optimisé</li>
+                        </ul>
+                        <ul class="offer-list">
+                            <li>Support (1 mois)</li>
+                            <li>Éditeur de contenu simple</li>
+                            <li>Garanti 48h ou remboursé</li>
+                        </ul>
+                    </div>
+                    <a href="https://tally.so/r/spark" class="btn btn-lg btn-etincelle" style="width: 100%;">
+                        Je lance mon site →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding bg-papier">
+            <div class="container">
+                <h2 class="text-center" data-reveal="fade-up">Questions fréquentes</h2>
+                <div class="faq-accordion mt-large">
+                    <div class="faq-item" data-reveal="fade-up" data-delay="0.1">
+                        <input type="checkbox" id="faq1">
+                        <label for="faq1">Est-ce que je peux modifier mon site ensuite ?</label>
+                        <div class="faq-answer">
+                            <p>Oui. On te livre un accès à un éditeur simple. Pas besoin de toucher au code pour changer un texte ou une photo.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item" data-reveal="fade-up" data-delay="0.2">
+                        <input type="checkbox" id="faq2">
+                        <label for="faq2">Et après la première année, ça coûte combien ?</label>
+                        <div class="faq-answer">
+                            <p>99 € / an pour le renouvellement hébergement + domaine. C'est tout. Rien de caché.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item" data-reveal="fade-up" data-delay="0.3">
+                        <input type="checkbox" id="faq3">
+                        <label for="faq3">Pourquoi seulement 490 € ?</label>
+                        <div class="faq-answer">
+                            <p>Parce qu'on a automatisé tout ce qui n'apporte pas de valeur directe. On se concentre sur l'efficacité : un design pro, un message clair, un site rapide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">SP/<span class="accent">\</span>RK</a>
+                    <p class="mt-small">Sites web ultra-performants pour pros pressés.</p>
+                </div>
+                <div>
+                    <a href="mailto:contact@spark.co" class="footer-link">contact@spark.co</a>
+                </div>
+            </div>
+            <div class="footer-legal">
+                <p>&copy; 2025 SPARK.CO · Tous droits réservés</p>
+                <p>Mentions légales · CGV · Paiement sécurisé</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="app.js"></script>
+    <script src="main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (spark.auth.isAuthenticated()) {
+                document.getElementById('nav-login').style.display = 'none';
+                document.getElementById('nav-dashboard').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

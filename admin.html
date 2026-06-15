@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin — SPARK.CO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono&family=Plus+Jakarta+Sans:wght@400;500&family=Syne:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 32px;
+        }
+        th {
+            text-align: left;
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            color: var(--c-gris);
+            padding: 16px;
+            border-bottom: 1px solid var(--c-border);
+        }
+        td {
+            padding: 16px;
+            border-bottom: 1px solid var(--c-border);
+            font-size: 14px;
+        }
+        tr:hover {
+            background: rgba(255,255,255,0.02);
+        }
+        .admin-stat-card {
+            padding: 24px;
+            text-align: center;
+        }
+        .admin-stat-val {
+            font-size: 32px;
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            color: var(--c-etincelle);
+        }
+    </style>
+</head>
+<body class="bg-charbon">
+
+    <nav class="nav">
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">SP/<span class="accent">\</span>RK</a>
+            <div class="nav-links">
+                <a href="dashboard.html" class="nav-link">Mon Dashboard</a>
+                <a href="#" class="nav-link" onclick="spark.auth.logout()">Déconnexion</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="section-padding">
+        <div class="container">
+            <h1 data-reveal="fade-right">Panel Admin</h1>
+
+            <div class="grid grid-3 mt-large">
+                <div class="glass-card admin-stat-card">
+                    <span class="eyebrow">Total Commandes</span>
+                    <div class="admin-stat-val" id="stat-total">0</div>
+                </div>
+                <div class="glass-card admin-stat-card">
+                    <span class="eyebrow">En cours</span>
+                    <div class="admin-stat-val" id="stat-progress">0</div>
+                </div>
+                <div class="glass-card admin-stat-card">
+                    <span class="eyebrow">Sites Live</span>
+                    <div class="admin-stat-val" id="stat-live">0</div>
+                </div>
+            </div>
+
+            <div class="glass-card mt-large">
+                <h2 class="mb-medium">Toutes les commandes</h2>
+                <div style="overflow-x: auto;">
+                    <table id="admin-orders-table">
+                        <thead>
+                            <tr>
+                                <th>Client</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-orders-body">
+                            <!-- Skeletons -->
+                            <tr><td colspan="5"><div class="skeleton" style="height: 40px; margin: 10px 0;"></div></td></tr>
+                            <tr><td colspan="5"><div class="skeleton" style="height: 40px; margin: 10px 0;"></div></td></tr>
+                            <tr><td colspan="5"><div class="skeleton" style="height: 40px; margin: 10px 0;"></div></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="app.js"></script>
+    <script src="main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const user = spark.auth.getCurrentUser();
+            if (!user || user.role !== 'admin') {
+                window.location.href = 'dashboard.html';
+                return;
+            }
+
+            await loadAdminData();
+        });
+
+        async function loadAdminData() {
+            try {
+                const orders = await spark.api('/orders'); // Admin sees all if backend is coded correctly
+                const body = document.getElementById('admin-orders-body');
+                
+                body.innerHTML = '';
+                
+                let stats = { total: orders.length, progress: 0, live: 0 };
+
+                orders.forEach(order => {
+                    if (order.status === 'in_progress') stats.progress++;
+                    if (order.status === 'live') stats.live++;
+
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${order.user_name || 'Inconnu'}</td>
+                        <td>${order.user_email || 'Inconnu'}</td>
+                        <td><span class="status-badge status-${order.status}">${order.status}</span></td>
+                        <td>${spark.ui.formatDate(order.created_at)}</td>
+                        <td>
+                            <select class="form-control" style="padding: 4px 8px; font-size: 12px; width: auto;" 
+                                    onchange="updateStatus('${order.id}', this.value)">
+                                <option value="pending" ${order.status === 'pending' ? 'selected' : ''}>Pending</option>
+                                <option value="brief_received" ${order.status === 'brief_received' ? 'selected' : ''}>Brief Received</option>
+                                <option value="in_progress" ${order.status === 'in_progress' ? 'selected' : ''}>In Progress</option>
+                                <option value="review" ${order.status === 'review' ? 'selected' : ''}>Review</option>
+                                <option value="live" ${order.status === 'live' ? 'selected' : ''}>Live</option>
+                            </select>
+                        </td>
+                    `;
+                    body.appendChild(tr);
+                });
+
+                document.getElementById('stat-total').textContent = stats.total;
+                document.getElementById('stat-progress').textContent = stats.progress;
+                document.getElementById('stat-live').textContent = stats.live;
+
+            } catch (error) {
+                spark.toast.error('Erreur admin: ' + error.message);
+            }
+        }
+
+        async function updateStatus(orderId, newStatus) {
+            try {
+                await spark.api(`/orders/${orderId}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({ status: newStatus })
+                });
+                spark.toast.success('Statut mis à jour !');
+            } catch (error) {
+                spark.toast.error(error.message);
+            }
+        }
+    </script>
+</body>
+</html>

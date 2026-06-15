@@ -1,44 +1,42 @@
-# SPARK.CO — Guide de déploiement
+# SPARK.CO — Guide de déploiement (Multi-page)
 
-Ce dépôt contient les fichiers sources du site vitrine SPARK.CO. Le site est conçu pour être ultra-performant, sans framework et prêt pour la production.
+Ce guide explique comment déployer et personnaliser la nouvelle plateforme multi-pages de SPARK.CO.
 
-## 🚀 Déploiement Rapide (Vercel)
+## Architecture
+- **Frontend** : HTML/CSS/JS (Vanilla) situé dans `/home/team/shared/frontend/`.
+- **Backend** : API Express située dans `/home/team/shared/api/`.
+- **Base de données** : SQLite (via Turso).
 
-1. Connectez-vous à votre compte [Vercel](https://vercel.com).
-2. Cliquez sur **Add New > Project**.
-3. Importez votre dépôt ou glissez-déposez le dossier contenant les fichiers.
-4. Vercel détectera automatiquement qu'il s'agit d'un site statique.
-5. Cliquez sur **Deploy**.
+## Déploiement (2 min)
 
-Le site est maintenant en ligne !
+### 1. Backend
+Le backend doit être déployé sur un service supportant Node.js (Vercel, Render, Railway).
+Assurez-vous de configurer les variables d'environnement nécessaires (`DATABASE_URL`, `JWT_SECRET`).
 
-## 📝 Personnalisation
+### 2. Frontend
+Le frontend peut être hébergé sur n'importe quel service de fichiers statiques (Vercel, GitHub Pages, Netlify).
+L'URL de l'API est configurée dans `app.js` via la constante `API_BASE_URL`. Par défaut, elle pointe vers `http://localhost:3001/api`.
+
+## Personnalisation
 
 ### Modifier les textes
-Tous les textes sont directement modifiables dans le fichier `index.html`. Cherchez les balises `h1`, `h2`, `p` ou les classes `.quote` pour les témoignages.
+Tous les textes sont directement dans les fichiers HTML (`index.html`, `tarifs.html`, etc.). Recherchez les balises `h1`, `p`, et `li` pour les mettre à jour.
 
 ### Modifier les couleurs
-Les couleurs sont définies via des variables CSS au début du fichier `style.css` dans le bloc `:root` :
-- `--c-etincelle` : Couleur orange d'accent.
-- `--c-charbon` : Couleur de fond sombre.
-- `--c-papier` : Couleur de fond claire.
+Les couleurs sont gérées par des variables CSS dans `style.css` sous `:root`.
+- `--c-charbon` : Fond principal sombre.
+- `--c-etincelle` : Couleur d'accent orange.
+- `--c-flash` : Couleur d'accent jaune (utilisée pour les badges).
 
-### Lier le formulaire (Tally)
-Les boutons d'appel à l'action (CTA) pointent vers `https://tally.so/r/spark`. 
-Pour utiliser votre propre formulaire :
-1. Créez un formulaire sur [Tally.so](https://tally.so).
-2. Copiez l'URL de votre formulaire.
-3. Remplacez toutes les occurrences de l'URL Tally dans `index.html`.
+### Lier votre formulaire Tally
+Le bouton "Je lance mon site →" pointe vers `https://tally.so/r/spark`. Remplacez ce lien dans `index.html`, `tarifs.html` et `dashboard.html` par votre propre URL de formulaire.
 
-## ⚙️ Maintenance & Renouvellement
+## Gestion des Commandes
+- **Dashboard Client** : Les clients peuvent voir leurs commandes et modifier leur brief après connexion.
+- **Panel Admin** : Accessible uniquement aux utilisateurs avec le rôle `admin`. Permet de changer le statut des commandes (Pending -> Live).
 
-- **Hébergement & Domaine** : À renouveler chaque année (99€/an conseillé pour le client).
-- **Contact** : Pour toute question technique, contactez `contact@spark.co`.
-- **Google Analytics** : Pour activer le suivi, remplacez le code de suivi générique (si ajouté) par votre propre ID de mesure dans le `<head>` de `index.html`.
-- **Animations** : Les animations utilisent la bibliothèque [GSAP](https://greensock.com/gsap/). Elles sont configurées dans `main.js`.
+## Renouvellement Annuel
+Le système prévoit un renouvellement à 99€/an. Cette logique doit être gérée côté backend ou via une automatisation Stripe (liens de paiement).
 
-## 🛠 Contraintes Techniques Respectées
-- Zero framework (JS Vanille).
-- Mobile-first & Responsive.
-- Accessibilité (WCAG AA).
-- Performance maximale (chargement quasi-instantané).
+---
+© 2025 SPARK.CO — Propulsé par l'efficacité.
