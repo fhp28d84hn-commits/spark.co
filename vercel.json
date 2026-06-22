@@ -1,6 +1,5 @@
 {
-  "cleanUrls": true,
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "http://localhost:3001/api/$1" }
+    { "source": "/api/(.*)", "destination": "/api/server.js" }
   ]
 }

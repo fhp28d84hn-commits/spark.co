@@ -2,7 +2,7 @@
  * SPARK.CO - Shared Application Logic
  */
 
-const API_BASE_URL = 'http://localhost:3001/api';
+const API_BASE_URL = window.__API_URL__ || 'http://localhost:3001/api';
 
 /**
  * API Helper
